@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <style>
+      #box1 {
+        background-image: linear-gradient(
+          135deg,
+          rgb(189, 112, 189) 30%,
+          rgb(106, 72, 129) 30%,
+          rgb(216, 77, 147) 30%
+        );
+        display: flex;
+        justify-content: space-between;
+        border: 1px groove gray;
+
+        background-color: bisque;
+        max-width: 100%;
+        grid-template-columns: 33% 33% 33%;
+      }
+      table {
+        border: 1px blue groove;
+      }
+
+      th {
+        border: 1px black solid;
+
+        background-color: rgba(153, 103, 118, 0.566);
+      }
+      td {
+        border: 1px black solid;
+      }
+      img {
+        width: 100px;
+      }
+      tr {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: 100%;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body id="box1"></body>
+</html>
+<script>
+  /* verbendung mit HTML */
+
+  const e = document.getElementById("box1");
+
+  /* Erstellt einen eigenständigen HTML-Element wie zb hr, br, img */
+
+  function singleElement(tag) {
+    return `<${tag}>`;
+  }
+
+  /* Erstellt ein HTML Block-Element wie zb zb hr, br, img mit zwei Attributen */
+
+  function singleElementEx(tag, attr) {
+    return `<${tag} ${attr[0].name} = "${attr[0].wert}" ${attr[1].name} = "${attr[1].wert}" />`;
+  }
+
+  /* Erstellt ein HTML Block-Element wie zb div oder p */
+
+  function blockElement(tag, wert) {
+    return `<${tag}>${wert}</${tag}>`;
+  }
+
+  /* Erstellt ein HTML Block-Element wie zb div oder p mit einem Attribut */
+
+  function blockElementEx(tag, wert, attr) {
+    return `<${tag} ${attr[0]} = "${attr[1]}">${wert}</${tag}>`;
+  }
+
+  /* Erstellt ein HTML Block-Element wie zb div oder p mit zwei Attribut */
+
+  function blockElementEx2(tag, wert, attr) {
+    return `<${tag} ${attr[0].name} = "${attr[0].wert}" ${attr[1].name} = "${attr[1].wert}">${wert}</${tag}>`;
+  }
+  /* Erstellt ein HTML Block-Element wie zb div oder p mit zwei Attribut */
+  function blockElementExMitArrayJSON(tag, wert, attr) {
+    let s = "";
+    // *** //
+    for (let x = 0; x < wert.length; x++) {
+      s += `<${tag}>${wert[x].feld1} ${wert[x].feld2}</${tag}>`;
+    }
+    // *** //
+    return `<${tag} ${attr[0]} = "${attr[1]}">${s}</${tag}>`;
+  }
+  /* Erstellt ein HTML Block-Element wie zb div oder pmit zei wert */
+  function blockElementMit2Werte(tag, wert1, wert2) {
+    return `<${tag}>${wert1} ${wert2}</${tag}>`;
+  }
+
+  /* HTML-Inhalt einfugen*/
+  /* header Erstellen  */
+
+  e.innerHTML += blockElementEx(
+    "table",
+    /* Tabelle -> Zeile -> 1 : Header */
+    blockElementEx(
+      "tr",
+      // erst th start //
+      blockElement(
+        "th",
+        blockElement("h4", "strand tourismus") +
+          singleElement("hr") +
+          blockElementEx(
+            "select",
+            blockElementEx("option", "gouna", [""]) +
+              blockElementEx("option", "Sharm el Sheikh", [""]) +
+              blockElementEx("option", "Hurghada", [""]),
+            [""]
+          ),
+        ["style", "background-color:rot;"]
+      ) +
+        // erst th ende //
+        blockElement(
+          // zweite th start //
+          "th",
+          blockElement("h4", "kultureller tourismus") +
+            singleElement("hr") +
+            blockElementEx(
+              "select",
+              blockElementEx("option", "neue hauptstadt", [""]) +
+                blockElementEx("option", "kairo", [""]) +
+                blockElementEx("option", "luxor", [""]),
+              [""]
+            ),
+          ["style", "background-color:rot;"]
+        ) +
+        // zweite th ende //
+        blockElement(
+          "th",
+          blockElement("h4", "medizien tourismus") +
+            singleElement("hr") +
+            blockElementEx(
+              "select",
+              blockElementEx("option", "helwan", [""]) +
+                blockElementEx("option", "marsa alam", [""]) +
+                blockElementEx("option", "oyon mosa", [""]),
+              [""]
+            ),
+          ["style", "background-color:rot;"]
+        ),
+      [
+        "style",
+        "background-color: rgba(29, 88, 164, 0.196);display: flex;justify-content: space-between; max-width: 100%;"
+      ]
+    ) +
+      /* Tabelle -> Zeile -> 2 */
+      blockElementEx(
+        //  zweite tr erhalt 3 td Start //
+        "tr",
+        blockElement(
+          "td",
+          // erst td in zweite tr Start //
+          blockElementMit2Werte(
+            "h4",
+            " Buchen ziel strand tourismus",
+            singleElement("hr") +
+              singleElementEx("img", [
+                {
+                  name: "src",
+                  wert:
+                    "https://th.bing.com/th/id/R.60bbe830026d5edc407bfb54351cdc42?rik=qW0WTVzY0mJgPQ&riu=http%3a%2f%2fwww.reisetiger.net%2fwp-content%2fuploads%2f2014%2f09%2fTUI_com_Aegypten_Hurghada_Steigenberger_Poolanlage.png&ehk=QlFzaVDvXe32IGPQ4Ee5yEkJfkYINnfAtuzVHat56Us%3d&risl=&pid=ImgRaw&r=0 "
+                },
+
+                {
+                  name: "style",
+                  wert: "width:200px;"
+                }
+              ])
+          ) +
+            singleElement("hr") +
+            blockElementEx(
+              "ol",
+              blockElementEx(
+                "li",
+                blockElement("u", blockElement("p", "gouna")),
+                []
+              ) +
+                blockElementEx(
+                  "li",
+                  blockElement("u", blockElement("p", "marsa alam")),
+                  []
+                ) +
+                blockElementEx(
+                  "li",
+                  blockElement("u", blockElement("p", "Sharm el Sheikh")),
+                  []
+                ) +
+                blockElementEx(
+                  "li",
+                  blockElement("u", blockElement("p", "Hurghada")),
+                  []
+                ),
+              ["style", "list-style-type: none;"]
+            ),
+          ["style", "background-color: coral;list-style-type: none;"]
+        ) +
+          // erst td in zweite tr ende //
+          blockElement(
+            "td",
+            // zweite td in zweite tr Start //
+            blockElementMit2Werte(
+              "h4",
+              " Buchen ziel kultureller tourismus",
+              singleElement("hr") +
+                singleElementEx("img", [
+                  {
+                    name: "src",
+                    wert:
+                      "https://cdn.prod.www.spiegel.de/images/e2e8fc6d-0001-0004-0000-000000823468_w1528_r1.5_fpx30_fpy54.98.jpg "
+                  },
+
+                  {
+                    name: "style",
+                    wert: "width:200px;"
+                  }
+                ])
+            ) +
+              singleElement("hr") +
+              blockElementEx(
+                "ul",
+                blockElementEx(
+                  "li",
+                  blockElement("u", blockElement("sup", "neue hauptstadt")),
+                  []
+                ) +
+                  blockElementEx(
+                    "li",
+                    blockElement("u", blockElement("sup", "kairo")),
+                    []
+                  ) +
+                  blockElementEx(
+                    "li",
+                    blockElement("u", blockElement("sup", "giza")),
+                    []
+                  ) +
+                  blockElementEx(
+                    "li",
+                    blockElement("u", blockElement("sup", "luxor")),
+                    []
+                  ),
+                ["style", "list-style-type: none;"]
+              ),
+            [
+              "style",
+              "background-color: rgba(29, 88, 164, 0.196);display: flex;justify-content: space-around;width:1200px;"
+            ]
+            // zweit td in zweite tr ende //
+          ) +
+          // dritte td in zweite tr start //
+          blockElement(
+            "td",
+            blockElementMit2Werte(
+              "label",
+              "<br>label text<br><br>",
+              singleElementEx("input", [
+                {
+                  name: "id",
+                  wert: "serch"
+                },
+                {
+                  name: "type",
+                  wert: "date"
+                }
+              ]) +
+                singleElement("br") +
+                singleElement("br") +
+                singleElement("br") +
+                singleElement("hr")
+            ) +
+              blockElementMit2Werte(
+                "label",
+                "<br>label text<br><br>",
+                blockElement("textarea", " text")
+              )
+          ),
+        []
+        //  zweite tr ende//
+      ) +
+      //drite tr
+      blockElementEx(
+        "tr",
+        //TD1
+        blockElement(
+          "td",
+          singleElementEx("img", [
+            {
+              name: "src",
+              wert:
+                "https://i.pinimg.com/originals/e3/7f/7d/e37f7d6411130f0f38cea9a68f025d7d.jpg"
+            },
+
+            {
+              name: "style",
+              wert: "width:200px;"
+            }
+          ]) +
+            blockElement("p", " gouna") +
+            singleElement("hr") +
+            singleElementEx("img", [
+              {
+                name: "src",
+                wert:
+                  "https://lp-cms-production.imgix.net/2019-06/GettyImages-556642199_master.jpg?fit=crop&q=40&sharp=10&vib=20&auto=format&ixlib=react-8.6.4"
+              },
+
+              {
+                name: "style",
+                wert: "width:200px;"
+              }
+            ]) +
+            blockElement("p", " marsa alam") +
+            singleElement("hr") +
+            singleElementEx("img", [
+              {
+                name: "src",
+                wert:
+                  "https://th.bing.com/th/id/OIP.H6hfPoF02psvevKB-9WDFAHaE7?pid=ImgDet&rs=1"
+              },
+
+              {
+                name: "style",
+                wert: "width:300px;"
+              }
+            ]) +
+            blockElement("p", "hurgahda") +
+            singleElement("hr")
+        ) +
+          //TD2
+          blockElement(
+            "td",
+            blockElementEx(
+              "dl",
+              blockElementEx("dt", "teuerer-hotel<br><br>", ["style", ""]) +
+                blockElementEx("dd", "hilton<br>", ["style", ""]) +
+                blockElementEx("dd", "schiraton<br>", ["style", ""]) +
+                blockElementEx("dt", "miteller-hotel<br><br>", ["style", ""]) +
+                blockElementEx("dd", "grand-h<br>", ["style", ""]) +
+                blockElementEx("dd", "resort<br>", ["style", ""]) +
+                blockElementEx("dt", "genustiger-hotel<br><br>", [
+                  "style",
+                  ""
+                ]) +
+                blockElementEx("dd", "four-seson<br>", ["style", ""]) +
+                blockElementEx("dd", "montaza<br>", ["style", ""]),
+              ["style", "justify-content: center;"]
+            )
+          ) +
+          //TD3
+          blockElement(
+            "td",
+            //IMG
+            singleElementEx("img", [
+              {
+                name: "src",
+                wert:
+                  "https://th.bing.com/th/id/R.c02ba89e3373b961fe335a11781ca200?rik=U56MJLfr9L5rGw&riu=http%3a%2f%2fwww.ellada.net%2flouis%2fprincess-beach%2fimages%2f08.jpg&ehk=lDUoA3j6injMgzBWu7Wm1fMTQ0Z70k0AMJ6YG%2bUVzcc%3d&risl=&pid=ImgRaw&r=0"
+              },
+
+              {
+                name: "style",
+                wert: "width:200px;"
+              }
+            ]) +
+              //HR
+              singleElement("hr") +
+              blockElementEx(
+                "table",
+                blockElement(
+                  "tr",
+                  blockElement("th", "Hotel") + blockElement("th", "Preis")
+                ) +
+                  blockElement(
+                    "tr",
+                    blockElement(
+                      "td",
+                      blockElement("label", " labeltext<br>") +
+                        blockElementEx(
+                          "select",
+                          blockElementEx("option", "gouna", [""]) +
+                            blockElementEx("option", "Sharm el Sheikh", [""]) +
+                            blockElementEx("option", "Hurghada", [""]),
+                          [""]
+                        )
+                    ) +
+                      blockElement(
+                        "td",
+                        blockElement(
+                          "div",
+                          blockElement("label", " labeltext") +
+                            singleElementEx("input", [
+                              {
+                                name: "id",
+                                wert: "serch"
+                              },
+                              {
+                                name: "type",
+                                wert: "text"
+                              }
+                            ])
+                        ) +
+                          blockElement(
+                            "div",
+                            blockElement("label", " labeltext") +
+                              singleElementEx("input", [
+                                {
+                                  name: "id",
+                                  wert: "serch"
+                                },
+                                {
+                                  name: "type",
+                                  wert: "text"
+                                }
+                              ])
+                          ) +
+                          blockElement(
+                            "div",
+                            blockElement("label", " labeltext<br>") +
+                              singleElementEx("input", [
+                                {
+                                  name: "id",
+                                  wert: "serch"
+                                },
+                                {
+                                  name: "type",
+                                  wert: "text"
+                                }
+                              ])
+                          )
+                      )
+                  ),
+                []
+              )
+          ),
+        [
+          "style",
+          "background-color: rgba(29, 88, 164, 0.196);display: flex;justify-content: space-around;width:1200px;"
+        ]
+      ) +
+      //TR4
+      blockElementEx(
+        "tr",
+        //td1
+        blockElement(
+          "td",
+          blockElement("p", " urlaupziel") +
+            singleElement("br") +
+            blockElement("p", " finden uns")
+        ) +
+          //td2
+          blockElement(
+            "td",
+            blockElementEx(
+              "ul",
+
+              blockElementEx("li", blockElement("h4", "<u>uberuns</u>"), [
+                "style",
+                "padding: 10px;"
+              ]) +
+                blockElementEx("li", blockElement("h4", "<u>kontakt</u>"), [
+                  "style",
+                  "padding: 10px;"
+                ]) +
+                blockElementEx("li", blockElement("h4", "<u>adresse</u>"), [
+                  "style",
+                  "padding: 10px;"
+                ]) +
+                blockElementEx("li", blockElement("h4", "<u>webseite</u>"), [
+                  "style",
+                  "padding: 10px;"
+                ]),
+              ["style", "list-style-type: none;display: flex;"]
+            ) +
+              singleElement("hr") +
+              blockElementEx(
+                "ul",
+
+                blockElementEx("li", blockElement("h4", "<u>uberuns</u>"), [
+                  "style",
+                  "padding: 10px;"
+                ]) +
+                  blockElementEx("li", blockElement("h4", "<u>kontakt</u>"), [
+                    "style",
+                    "padding: 10px;"
+                  ]) +
+                  blockElementEx("li", blockElement("h4", "<u>adresse</u>"), [
+                    "style",
+                    "padding: 10px;"
+                  ]) +
+                  blockElementEx("li", blockElement("h4", "<u>webseite</u>"), [
+                    "style",
+                    "padding: 10px;"
+                  ]),
+                ["style", "list-style-type: none;display: flex;"]
+              )
+          ),
+        [("", "")]
+      ) +
+      //td3
+      blockElement(
+        "td",
+        singleElementEx("img", [
+          {
+            name: "src",
+            wert:
+              "https://th.bing.com/th/id/R.c02ba89e3373b961fe335a11781ca200?rik=U56MJLfr9L5rGw&riu=http%3a%2f%2fwww.ellada.net%2flouis%2fprincess-beach%2fimages%2f08.jpg&ehk=lDUoA3j6injMgzBWu7Wm1fMTQ0Z70k0AMJ6YG%2bUVzcc%3d&risl=&pid=ImgRaw&r=0"
+          },
+
+          {
+            name: "style",
+            wert: "width:200px;"
+          }
+        ]) +
+          singleElement("hr") +
+          blockElement("p", " urlaupziel") +
+          blockElementEx(
+            "dl",
+            blockElementEx("dt", "teuerer-hotel<br><br>", ["style", ""]) +
+              blockElementEx("dd", "hilton<br>", ["style", ""]) +
+              blockElementEx("dd", "schiraton<br>", ["style", ""]) +
+              blockElementEx("dt", "miteller-hotel<br><br>", ["style", ""]) +
+              blockElementEx("dd", "grand-h<br>", ["style", ""]) +
+              blockElementEx("dd", "resort<br>", ["style", ""]) +
+              blockElementEx("dd", "four-seson<br>", ["style", ""]) +
+              blockElementEx("dd", "montaza<br>", ["style", ""]),
+            ["style", "display: flex;width:1200px;"]
+          )
+      ),
+    [
+      "style",
+      "background-color: rgba(29, 88, 164, 0.196);display: flex;justify-content: space-around;width:1200px;"
+    ]
+  );
+</script>
